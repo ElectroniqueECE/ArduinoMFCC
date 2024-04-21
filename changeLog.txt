@@ -1,0 +1,7 @@
+24/04/23 v1.0
+Initial commit to Arduino Library Manager.
+
+21/04/24 v2.0
+Remove useless function
+Correct memory leak issues
+debug functions 
