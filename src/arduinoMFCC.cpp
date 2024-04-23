@@ -207,17 +207,17 @@ void arduinoMFCC::apply_mel_filter_bank() {
 /////////////////////////////////////////////////////////////////////////////
 
 void arduinoMFCC::apply_fft() {
-  arduinoFFT myFFTframe;
+
   double *_vframe= (double*)malloc(_frame_size * sizeof(double));
    double *_rframe= (double*)malloc(_frame_size * sizeof(double));
   for(uint16_t i=0;i<_frame_size;i++){
     _rframe[i]=_frame[i];
     _vframe[i]=0.0;
   }
-  myFFTframe= arduinoFFT(_rframe, _vframe,  _frame_size, (double)_samplerate);
-  myFFTframe.DCRemoval();
-  myFFTframe.Compute(FFT_FORWARD);
-  myFFTframe.ComplexToMagnitude();
+  ArduinoFFT<double> myFFTframe= ArduinoFFT<double>(_rframe, _vframe,  _frame_size, (double)_samplerate);
+  myFFTframe.dcRemoval();
+  myFFTframe.compute(FFT_FORWARD);
+  myFFTframe.complexToMagnitude();
   for(uint16_t i=0;i<_frame_size;i++)  _frame[i]=(float)_rframe[i];
 
   free(_rframe);
